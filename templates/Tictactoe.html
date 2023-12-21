@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/css/tictactoestyles.css"/>
+    <title>Tictactoe</title>
+</head>
+<h1 style="text-align: center;">Welcome to tictactoe game!</h1>
+<body>
+    <div class="board">
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+        <div class="tile"></div>
+    </div>
+    <div id ="Textmessage" style="text-align: center;">
+    <h2 >Choose your player X/O:</h2>
+    <button id="playerchoiceX" onclick="ChooseplayerX()">X</button>
+    <button id="playerchoiceO" onclick="ChooseplayerO()">O</button>
+</div>
+</div>
+<div><form action="http://127.0.0.1:5000/">
+    <input type="submit" value="Back to home page" />
+    </form></div>
+<script>
+let board = ["","","","","","","","",""]
+let player = ''
+let gamestarted=false
+
+const beginGame = (player) => {
+    document.getElementById('Textmessage').innerHTML=`<h2>Game begins! you are ${player}<h2>`
+gamestarted=true
+}
+
+const ChooseplayerX = () => {
+     player = document.getElementById('playerchoiceX').innerHTML 
+    beginGame(player)
+   }
+
+const ChooseplayerO = () => {
+     player = document.getElementById('playerchoiceO').innerHTML 
+    beginGame(player)
+   }
+
+const playTurn = (i) => { 
+    if (gamestarted && board[i]=='') { board[i]=player;        
+        
+    
+document.getElementsByClassName('tile')[i].innerHTML = player
+player = player == 'X' ? 'O' : 'X'
+document.getElementById('Textmessage').innerHTML=`<h2> ${player}'s turn<h2>`;
+    } else if (gamestarted){
+        alert ("this tile is already taken!")
+    }
+}
+window.onload = () => {
+    let tiles = document.getElementsByClassName('tile')
+    for(let i = 0; i < tiles.length; i++) {
+        tiles[i].addEventListener('click', function() { playTurn(i) })
+        
+    }
+}
+
+</script>
+</body>
+</html>
